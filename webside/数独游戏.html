@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可爱数独游戏</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <p>游戏加载中...</p>
+    </div>
+
+    <div class="background-decorations">
+        <div class="decoration">🌸</div>
+        <div class="decoration">✨</div>
+        <div class="decoration">🎀</div>
+        <div class="decoration">💖</div>
+    </div>
+
+    <h1 class="game-title">✨ 可爱数独 ✨</h1>
+    
+    <div class="game-instructions">
+        <button class="instructions-btn" onclick="toggleInstructions()">
+            <i class="fas fa-question-circle"></i> 游戏说明
+        </button>
+        <div class="instructions-content" id="instructionsContent">
+            <h3>游戏规则：</h3>
+            <p>1. 每行、每列和每个3x3方格内必须包含1-9的数字</p>
+            <p>2. 数字不能重复</p>
+            <p>3. 点击空格后选择数字填入</p>
+            <p>4. 完成后点击"检查答案"</p>
+        </div>
+    </div>
+
+    <div class="music-controller">
+        <button class="music-btn" onclick="toggleMusic()" title="背景音乐">
+            <i class="fas fa-music" id="musicIcon"></i>
+        </button>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="../music/background-music.mp3.mp3" type="audio/mp3">
+        您的浏览器不支持音频元素。
+    </audio>
+
+    <div class="sudoku-container">
+        <div class="game-header">
+            <div class="timer" id="timer">00:00</div>
+            <div class="difficulty">
+                难度：
+                <select id="difficultySelect">
+                    <option value="easy">简单</option>
+                    <option value="medium">中等</option>
+                    <option value="hard">困难</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="sudoku-board" id="sudokuBoard"></div>
+
+        <div class="number-pad" id="numberPad">
+            <button class="number-btn" onclick="selectNumber(1)">1</button>
+            <button class="number-btn" onclick="selectNumber(2)">2</button>
+            <button class="number-btn" onclick="selectNumber(3)">3</button>
+            <button class="number-btn" onclick="selectNumber(4)">4</button>
+            <button class="number-btn" onclick="selectNumber(5)">5</button>
+            <button class="number-btn" onclick="selectNumber(6)">6</button>
+            <button class="number-btn" onclick="selectNumber(7)">7</button>
+            <button class="number-btn" onclick="selectNumber(8)">8</button>
+            <button class="number-btn" onclick="selectNumber(9)">9</button>
+        </div>
+
+        <div class="controls">
+            <button onclick="startNewGame()" class="control-btn">
+                <i class="fas fa-play"></i> 新游戏
+            </button>
+            <button onclick="checkSolution()" class="control-btn">
+                <i class="fas fa-check"></i> 检查答案
+            </button>
+            <button onclick="clearCell()" class="control-btn">
+                <i class="fas fa-eraser"></i> 清除
+            </button>
+        </div>
+    </div>
+
+    <div class="success-modal" id="successModal">
+        <div class="modal-content">
+            <h2>🎉 恭喜通关！ 🎉</h2>
+            <p>用时：<span id="completionTime">00:00</span></p>
+            <button onclick="startNewGame()">再来一局</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2024 可爱数独游戏 | 开心玩耍~</p>
+    </footer>
+
+    <script src="js/game.js"></script>
+    <script>
+        window.addEventListener('load', function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 500);
+        });
+
+        function toggleInstructions() {
+            const content = document.getElementById('instructionsContent');
+            content.style.display = content.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html> 
